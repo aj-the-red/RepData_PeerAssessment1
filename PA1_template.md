@@ -20,7 +20,8 @@ activity_data$date <- as.Date(activity_data$date, "%Y-%m-%d")
 ```r
 total_per_day <- aggregate(activity_data$steps, by = list(activity_data$date), FUN = sum)
 names(total_per_day) <- c("date", "steps")
-hist(total_per_day$steps, xlab = "steps per day")
+hist(total_per_day$steps, xlab = "steps per day", 
+     main = "Histogram of Total Steps per Day")
 mean_per_day <- mean(total_per_day$steps, na.rm = TRUE)
 median_per_day <- median(total_per_day$steps, na.rm = TRUE)
 abline(v = mean_per_day, col = 'red', lwd = 10)
@@ -41,7 +42,8 @@ mean_per_interval <- aggregate(activity_data$steps,
                                by = list(activity_data$interval), FUN = mean, na.rm = TRUE)
 names(mean_per_interval) <- c("interval", "steps")
 plot(mean_per_interval$interval, mean_per_interval$steps, 
-     type = "l", xlab = "5 minute interval", ylab = "Mean number of steps")
+     type = "l", xlab = "5 minute interval", ylab = "Mean number of steps",
+     main = "Average Daily Activity Pattern")
 interval_with_max_mean_steps <- mean_per_interval$interval[which.max(mean_per_interval$steps)]
 abline(v = interval_with_max_mean_steps, col = 'blue', lwd = 2)
 text(interval_with_max_mean_steps+100, 0, interval_with_max_mean_steps, col = "blue")
@@ -70,7 +72,8 @@ for (idx in 1:nrow(activity_data)) {
 
 total_per_day <- aggregate(activity_data$steps, by = list(activity_data$date), FUN = sum)
 names(total_per_day) <- c("date", "steps")
-hist(total_per_day$steps, xlab = "steps per day")
+hist(total_per_day$steps, xlab = "steps per day",
+     main = "Histogram of Total Steps per Day with Imputed Values")
 mean_per_day <- mean(total_per_day$steps, na.rm = TRUE)
 median_per_day <- median(total_per_day$steps, na.rm = TRUE)
 abline(v = mean_per_day, col = 'red', lwd = 10)
@@ -103,7 +106,8 @@ names(mean_per_interval_weekend) <- c("interval", "weekend", "steps")
 qplot(interval, steps,
       data = mean_per_interval_weekend,
       facets = weekend ~ .,
-      geom = "line", xlab = "5 minute interval", ylab = "Mean number of steps")
+      geom = "line", xlab = "5 minute interval", ylab = "Mean number of steps",
+      main = "Average Daily Activity Pattern")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
